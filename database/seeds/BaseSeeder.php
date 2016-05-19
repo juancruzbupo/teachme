@@ -31,7 +31,7 @@ abstract class BaseSeeder extends Seeder
         
         $seeder = new $seeder;
 
-        return $seeder::create($custonValue);
+        return $seeder->create($custonValue);
 
     }
 
