@@ -1,6 +1,5 @@
 <?php
 
-//use Illuminate\Database\Seeder;
 use TeachMe\Entities\User;
 use Faker\Factory as Faker;
 use Faker\Generator;
