@@ -3,36 +3,36 @@
 namespace TeachMe\Components;
 
 //injectando dependencia para config y view
-//use Illuminate\Contracts\Config\Repository as Config; 
-//use Illuminate\Contracts\View\View as View; 
+use Illuminate\Contracts\Config\Repository as Config; 
+use Illuminate\Contracts\View\Factory as View; 
+use Illuminate\Routing\UrlGenerator;
 use Collective\Html\HtmlBuilder as CollectiveHtmlBuilder;
-
 
 /**
  * summary
  */
 class HtmlBuilder extends CollectiveHtmlBuilder
 {
-    /*
-	protected $config;
+    /**
+     * @var Config
+    */    
+	private $config;
 
-	protected $view;
-
-	public function __construct(Config $config, View $view)
+	public function __construct(Config $config, View $view, UrlGenerator $url)
 	{
 		$this->config = $config;
-
 		$this->view = $view;
-	}*/
+        $this->url = $url;
+	}
 
     public function menu($items)
     {
     	if(! is_array($items))
     	{
-    		$items = config($items, array());
+    		$items = $this->config->get($items, array());
 		}
 
-    	return view('partials.menu', compact('items'));
+    	return $this->view->make('partials.menu', compact('items'));
     	
     }
 
