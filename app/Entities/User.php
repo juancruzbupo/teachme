@@ -27,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::getClass());
+    }
+
+    public function voted()
+    {
+        return $this->belongsToMany(Ticket::getClass(), 'ticket_votes');
+    }
 }
