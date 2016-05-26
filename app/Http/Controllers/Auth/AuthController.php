@@ -2,7 +2,7 @@
 
 namespace TeachMe\Http\Controllers\Auth;
 
-use TeachMe\User;
+use TeachMe\Entities\User;
 use Validator;
 use TeachMe\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -36,9 +36,9 @@ class AuthController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
-    }
+{
+    $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
+}
 
     /**
      * Get a validator for an incoming registration request.
@@ -69,4 +69,15 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return '/';
+    }
+
 }
