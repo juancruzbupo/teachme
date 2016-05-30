@@ -63,6 +63,7 @@ class TicketsController extends Controller
                         'status'  => 'open', 
                     ]);
 
+
         return Redirect::route('tickets.details',  $ticket->id);
     }
 }

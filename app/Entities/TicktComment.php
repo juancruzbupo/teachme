@@ -14,8 +14,9 @@ class TicktComment extends Entity
      *
      * @var array
      */
-    protected $fillable = [
-        'comment', 'link','user_id', 'ticket_id',
+    protected $fillable = 
+    [
+        'comment', 'link',
     ];
 
     public function ticket()
