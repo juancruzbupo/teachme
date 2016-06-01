@@ -5,11 +5,16 @@ use TeachMe\Entities\Ticket;
 /**
 * 
 */
-class TicketRepository 
+class TicketRepository extends BaseRepository
 {	
+	public function getModel()
+	{
+		return new Ticket();
+	}
+
 	protected function selectTicketList()
 	{
-		return Ticket::selectRaw(//realiza subconsultas
+		return $this->newQuery()->selectRaw(//realiza subconsultas
 	            'tickets.*,'
 	            .'(select count(*) from ticket_comments where ticket_comments.ticket_id = tickets.id) as num_comments,' 
 	            .'(select count(*) from ticket_votes where ticket_votes.ticket_id = tickets.id) as num_votes'
@@ -39,8 +44,4 @@ class TicketRepository
         			->paginate(20); 
 	}
 
-	public function findOrFail($id)
-	{
-		return Ticket::findOrFail($id);
-	}
 }
